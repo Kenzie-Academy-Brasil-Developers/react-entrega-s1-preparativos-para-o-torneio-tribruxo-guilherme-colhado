@@ -1,22 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react' 
+import Home from './components/Home';
+import Tribruxo from './components/Tribruxo';
+
 
 function App() {
+  const [students, setStudents] = useState([])
+  const [home, setHome] = useState(true)
+  const [tres, setTres] = useState([])
+  useEffect(()=>{fetch('http://hp-api.herokuapp.com/api/characters/students')
+    .then(response=>response.json())
+    .then(response=>setStudents(response))
+    .catch(error => console.log(error))}
+    ,[])
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {
+          home 
+          ? 
+          <Home setHome={setHome} tres={tres} setTres={setTres} students={students}/> 
+          : 
+          <Tribruxo students={students} tres={tres} setTres={setTres}/>
+        }
       </header>
     </div>
   );
