@@ -8,7 +8,7 @@ function App() {
   const [students, setStudents] = useState([])
   const [home, setHome] = useState(true)
   const [tres, setTres] = useState([])
-  useEffect(()=>{fetch('http://hp-api.herokuapp.com/api/characters/students')
+  useEffect(()=>{fetch('https://hp-api.herokuapp.com/api/characters/students')
     .then(response=>response.json())
     .then(response=>setStudents(response))
     .catch(error => console.log(error))}
